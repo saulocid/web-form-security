@@ -11,10 +11,14 @@ O exemplo foi de um formulario de login mas pode ser feito com qualquer comunica
 
 # Porque usar criptografia na requisição?
 Para ajudar a evitar ataques de força bruta (brutte-forçe)
+
 Para que pessoas que estão analizando o trafego de rede não possa ver informações valiosas
+
 Para dificultar que pessoas consigam replicar a comunicação com clientes http como o cULR, ajudando a fazer com que o programa funcione do jeito desejado
 
 # Detalhes
 A key responsavel pela criptografia/descriptografia é gerada no servidor para cada sessão (cookie) e só funcionará para aquela sessão
+
 Caso a pagina seja recarregada, uma nova key será gerada, fazendo com que a antiga sejá invalidada
+
 O servidor após descriptografar o corpo da requisição compara uma informação passada no cabeçalho com uma do corpo da requisição 
