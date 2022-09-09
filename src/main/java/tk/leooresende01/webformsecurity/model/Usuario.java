@@ -1,10 +1,14 @@
 package tk.leooresende01.webformsecurity.model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +19,17 @@ public class Usuario implements UserDetails {
 	@Id
 	private String username;
 	private String password;
-	private List<PerfilDoUsuario> perfil;
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<PerfilDoUsuario> perfil = new ArrayList<>();
+
+	public Usuario() {
+	}
+
+	public Usuario(String username, String password, List<PerfilDoUsuario> perfil) {
+		this.username = username;
+		this.password = password;
+		this.perfil = perfil;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

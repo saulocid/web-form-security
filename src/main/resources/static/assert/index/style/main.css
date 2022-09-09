@@ -1,0 +1,74 @@
+body {
+	background-color: white;	
+	position: relative;
+}
+
+main {
+	position: absolute;
+	background-color: #120a0ab5;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100vw;
+	height: 100vh;
+}
+
+.card-login {
+	width: 30vw;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	
+}
+
+.card-cabecalho {
+	align-self: center;
+	font-size: 40px;
+	font-family: sans-serif;
+	padding: 20px 0;
+	font-weight: bold;	
+}
+
+.form-login {
+	border-top: 1px black solid;;
+	display: flex;
+	padding: 20px 50px 50px 50px;
+	flex-direction: column;
+	row-gap: 50px;	
+}
+
+.login-campos {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+.nome-do-input {
+	align-self: center;
+	font-size: 20px;
+	font-family: sans-serif;
+}
+
+.input-formulario-login {
+	padding: 10px 5px;
+}
+
+.campo-submit {
+	align-self: center;	
+}
+
+.botao-submit {
+	background-color: orange;
+	color: white;
+	align-self: center;
+	padding: 15px 115px;
+	border: none;
+	border-radius: 5px;
+	transition: 300ms;
+	cursor: pointer;
+}
+
+.botao-submit:hover {
+	background-color: darkorange;
+}

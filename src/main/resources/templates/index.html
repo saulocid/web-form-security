@@ -4,10 +4,27 @@
 	<meta charset="UTF-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<title>Login</title>
-	<link th:href="@{/assert/base/style/reset.css}"> 
-	<link th:href="@{/assert/index/style/main.css}"> 
+	<link rel="stylesheet" th:href="@{/assert/base/style/reset.css}"/> 
+	<link rel="stylesheet" th:href="@{/assert/index/style/main.css}"/> 
 </head>
 <body>
-
+	<main>
+		<div class="card-login">
+			<h1 class="card-cabecalho">Login</h1>
+			<form th:object="${formLogin}" method="post" action="/" class="form-login">
+				<fieldset class="login-campos">
+					<label class="nome-do-input" for="usuario">Usuario</label>
+					<input th:field="*{username}" class="input-formulario-login" placeholder="Nome de usuario" id="usuario" type="text"/>
+				</fieldset>
+				<fieldset class="login-campos">
+					<label class="nome-do-input" for="senha">Senha</label>
+					<input th:field="*{password}" class="input-formulario-login" placeholder="Senha" id="senha" type="text"/>
+				</fieldset>
+				<fieldset class="campo-submit">
+					<input type="submit" class="botao-submit" value="Logar"/>
+				</fieldset>
+			</form>
+		</div>
+	</main>
 </body>
 </html>

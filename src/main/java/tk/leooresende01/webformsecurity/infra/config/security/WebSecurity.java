@@ -16,10 +16,11 @@ public class WebSecurity {
 	
 	@Bean
 	public SecurityFilterChain definirConfiguracoesDeSeguranca(HttpSecurity http) throws Exception {
-		//Definir caminho de login (raiz) como permitido sem autenticação em requisições GET e POST
+		//Definir caminho de login (raiz) e arquivos estaticos como permitido sem autenticação em requisições GET e POST
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry authorizeRequests = http.authorizeRequests();
 		authorizeRequests.antMatchers(HttpMethod.GET, "/").permitAll();
 		authorizeRequests.antMatchers(HttpMethod.POST, "/").permitAll();
+		authorizeRequests.antMatchers(HttpMethod.GET, "/assert/**").permitAll();
 		
 		//Pedindo autenticação para qualquer outro caminho
 		authorizeRequests.anyRequest().authenticated();
