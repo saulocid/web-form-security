@@ -18,7 +18,7 @@ public class HomeController {
 
 	@GetMapping
 	public String getPaginaFormLogin(HttpServletRequest req, Model modelo) {
-		//Gerar chave privada dinamica e salvando ela na sessão (vai servir apenas para essa sessão)
+		//Gerando chave privada dinamica e salvando ela na sessão do usuario (vai servir apenas para essa sessão)
 		this.service.generateAndSavePrivateKeyInSession(modelo, req);
 		return "index.html";
 	}

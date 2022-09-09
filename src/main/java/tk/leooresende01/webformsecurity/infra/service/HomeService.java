@@ -14,6 +14,8 @@ public class HomeService {
 	public void generateAndSavePrivateKeyInSession(Model modelo, HttpServletRequest req) {
 		//Gerando a chave que vai criptografar o formulario e salvando ela na sessão (cookie)
 		String rsaKey = RandomStringUtils.randomAlphanumeric(17).toUpperCase();
+		
+		//Passando ela para o back-end
 		modelo.addAttribute(PRIVATE_KEY_NAME, rsaKey);
 		req.getSession().setAttribute(PRIVATE_KEY_NAME, rsaKey);
 	}
