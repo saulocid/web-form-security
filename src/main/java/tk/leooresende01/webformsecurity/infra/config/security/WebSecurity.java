@@ -19,7 +19,8 @@ public class WebSecurity {
 		//Definir caminho de login (raiz) e arquivos estaticos como permitido sem autenticação em requisições GET e POST
 		ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry authorizeRequests = http.authorizeRequests();
 		authorizeRequests.antMatchers(HttpMethod.GET, "/").permitAll();
-		authorizeRequests.antMatchers(HttpMethod.POST, "/").permitAll();
+		authorizeRequests.antMatchers(HttpMethod.POST, "/login").permitAll();
+		authorizeRequests.antMatchers(HttpMethod.GET, "/logout").permitAll();
 		authorizeRequests.antMatchers(HttpMethod.GET, "/assert/**").permitAll();
 		
 		//Pedindo autenticação para qualquer outro caminho
@@ -27,6 +28,9 @@ public class WebSecurity {
 		
 		//Desativando formulario de login padrao (Vai ser feito manualmente)
 		http.formLogin().disable();
+		
+		//Habilitando formulario de logout
+		http.logout(logout -> logout.logoutSuccessUrl("/").logoutUrl("/logout"));
 		
 		//Desabilitando Anti-CSRF
 		http.csrf().disable();

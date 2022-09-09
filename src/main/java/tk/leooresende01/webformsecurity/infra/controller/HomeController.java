@@ -1,27 +1,30 @@
 package tk.leooresende01.webformsecurity.infra.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import tk.leooresende01.webformsecurity.infra.controller.dto.AutenticacaoForm;
+import tk.leooresende01.webformsecurity.infra.service.HomeService;
 
 @Controller
 @RequestMapping("/")
 public class HomeController {
-	
+	@Autowired
+	private HomeService service;
+
 	@GetMapping
-	public String getPaginaFormLogin(Model modelo, AutenticacaoForm authForm) {
-		modelo.addAttribute("formLogin", authForm);
+	public String getPaginaFormLogin(HttpServletRequest req, Model modelo) {
+		//Gerar chave privada dinamica e salvando ela na sessão (vai servir apenas para essa sessão)
+		this.service.generateAndSavePrivateKeyInSession(modelo, req);
 		return "index.html";
 	}
-	
-	@PostMapping
-	public String autenticarUser(AutenticacaoForm authForm, Model modelo) {
-		modelo.addAttribute("formLogin", new AutenticacaoForm());
-		System.out.println(authForm);
-		return "index.html";
+
+	@GetMapping("/sucesso")
+	public String paginaDeLogado() {
+		return "auth_success.html";
 	}
 }

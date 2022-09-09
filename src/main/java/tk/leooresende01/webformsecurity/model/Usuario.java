@@ -4,22 +4,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-@Entity
 public class Usuario implements UserDetails {
 	private static final long serialVersionUID = 1L;
-	@Id
 	private String username;
 	private String password;
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<PerfilDoUsuario> perfil = new ArrayList<>();
 
 	public Usuario() {
