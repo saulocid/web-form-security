@@ -17,8 +17,7 @@ import tk.leooresende01.webformsecurity.infra.controller.dto.AutenticacaoForm;
 
 public class CryptoUtil {
 
-	public static String descryptAESWhitPrivateKey(String chave, String payload) {
-		String secret = chave.toString();
+	public static String descryptAESWhitPrivateKey(String secret, String payload) {
 		byte[] cipherData = Base64.getDecoder().decode(payload);
 		byte[] saltData = Arrays.copyOfRange(cipherData, 8, 16);
 

@@ -22,6 +22,10 @@ export class FormularioService {
 		}
 	}
 	
+	limpaMensagemDeErro() {
+		document.querySelector(".error-message").style.display = "none";
+	}
+	
 	#pegarAutenticacao(formulario, time) {
 		let usuario = this.#pegarValorAtravezDoName(formulario, "username");
 		let senha = this.#pegarValorAtravezDoName(formulario, "password");

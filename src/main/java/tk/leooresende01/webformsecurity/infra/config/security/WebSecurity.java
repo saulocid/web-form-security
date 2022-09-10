@@ -26,6 +26,9 @@ public class WebSecurity {
 		//Pedindo autenticação para qualquer outro caminho
 		authorizeRequests.anyRequest().authenticated();
 		
+		//Desabilitar cache de requisição (Para evitar problemas com o cabeçalho)
+		 http.requestCache().disable();
+		 
 		//Desativando formulario de login padrao (Vai ser feito manualmente)
 		http.formLogin().disable();
 		

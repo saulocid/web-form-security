@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,12 +29,16 @@ public class LoginController {
 
 	@PostMapping
 	public ResponseEntity<?> autenticarUser(HttpServletRequest req, Model modelo,
-			@RequestBody AutenticacaoForm.EncryptedAutenticacaoForm payload) throws IOException {
+			@RequestBody AutenticacaoForm.EncryptedAutenticacaoForm payload,
+			@RequestHeader(value="aes-crypt") String aesTimeEncrypt) throws IOException {
+		//Pegar chave
+		String key = this.service.getKey(req);
+		
 		//Descriptografando o corpo da requisição e pegando o objeto que representa um formulario de autenticação
-		AutenticacaoForm authForm = this.service.getAuthFormFromCrypto(req, payload.getPayload());
+		AutenticacaoForm authForm = this.service.getAuthFormFromCrypto(req, payload.getPayload(), key);
 		
 		//Verificando se os parametros passado no cabeçalho e no corpo batem
-		this.service.verificarTime(authForm, req);
+		this.service.verificarTime(authForm, aesTimeEncrypt, key);
 		return this.service.autenticarUsuario(authManager, authForm);
 	}
 }

@@ -73,6 +73,10 @@ main {
 	background-color: darkorange;
 }
 
+.botao-submit:active {
+	background-color: orange;
+}
+
 .error-message {
 	display: none;
 	color: red;

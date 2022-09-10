@@ -16,14 +16,9 @@ import tk.leooresende01.webformsecurity.infra.util.CryptoUtil;
 @Service
 public class LoginService {
 	
-	private static final String AES_HEADER = "Aes-Crypt";
-	
-	public AutenticacaoForm getAuthFormFromCrypto(HttpServletRequest req, String payload) {
-		//Pegando a chave privada que foi salva na sessão do usuario
-		Object chave = req.getSession().getAttribute(HomeService.PRIVATE_KEY_NAME);
-		
+	public AutenticacaoForm getAuthFormFromCrypto(HttpServletRequest req, String payload, String chave) {
 		//Descriptografando o corpo da requisição em AES
-		String cryptBase64 = CryptoUtil.descryptAESWhitPrivateKey(chave.toString(), payload);
+		String cryptBase64 = CryptoUtil.descryptAESWhitPrivateKey(chave, payload);
 		
 		//Descriptografando a base64 e retornando o objeto de autenticação
 		AutenticacaoForm autenticacaoForm = CryptoUtil.decodeBase64AndGetAuth(cryptBase64);
@@ -42,13 +37,16 @@ public class LoginService {
 		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 	}
 	
-	public void verificarTime(AutenticacaoForm authForm, HttpServletRequest req) {
+	public void verificarTime(AutenticacaoForm authForm, String aesTimeCrypt, String chave) {
 		//Verificar se o parametro do cabeçalho AES_Crypt equivale a o do corpo da requisição
-		String aesTimeCrypt = req.getHeader(AES_HEADER);
-		Object chave = req.getSession().getAttribute(HomeService.PRIVATE_KEY_NAME);
-		String timeDescrypt = CryptoUtil.descryptAESWhitPrivateKey(chave.toString(), aesTimeCrypt);
+		String timeDescrypt = CryptoUtil.descryptAESWhitPrivateKey(chave, aesTimeCrypt);
 		if (!authForm.getTime().equals(timeDescrypt)) {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	public String getKey(HttpServletRequest req) {
+		//Pegando a chave privada que foi salva na sessão do usuario
+		return (String) req.getSession().getAttribute(HomeService.PRIVATE_KEY_NAME);
 	}
 }

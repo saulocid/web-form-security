@@ -1,7 +1,18 @@
 package tk.leooresende01.webformsecurity.infra.controller.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.lang.NonNull;
+
 public class AutenticacaoForm {
+	@NonNull
+	@NotBlank
+	@Pattern(regexp = "^[A-Za-z]\\w{5,29}$")
 	private String username;
+	@NonNull
+	@NotBlank
+	@Pattern(regexp = "^[A-Za-z]\\w{5,29}$")
 	private String password;
 	private String time;
 
