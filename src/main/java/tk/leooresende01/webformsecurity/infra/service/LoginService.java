@@ -10,6 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import tk.leooresende01.webformsecurity.infra.controller.advice.exceptions.ParametrosNaRequisicaoInvalidosException;
+import tk.leooresende01.webformsecurity.infra.controller.advice.exceptions.MensagensDeException;
+import tk.leooresende01.webformsecurity.infra.controller.advice.exceptions.UsuarioOuSenhaInvalidosException;
 import tk.leooresende01.webformsecurity.infra.controller.dto.AutenticacaoForm;
 import tk.leooresende01.webformsecurity.infra.util.CryptoUtil;
 
@@ -41,12 +44,19 @@ public class LoginService {
 		//Verificar se o parametro do cabeçalho AES_Crypt equivale a o do corpo da requisição
 		String timeDescrypt = CryptoUtil.descryptAESWhitPrivateKey(chave, aesTimeCrypt);
 		if (!authForm.getTime().equals(timeDescrypt)) {
-			throw new IllegalArgumentException();
+			throw new ParametrosNaRequisicaoInvalidosException(MensagensDeException.FALTA_DE_PARAMETROS.getMensagem());
 		}
 	}
 
 	public String getKey(HttpServletRequest req) {
 		//Pegando a chave privada que foi salva na sessão do usuario
 		return (String) req.getSession().getAttribute(HomeService.PRIVATE_KEY_NAME);
+	}
+
+	public void validarFormParams(AutenticacaoForm authForm) {
+		String username = authForm.getUsername();
+		String password = authForm.getPassword();
+		if (!username.matches("^[A-Za-z0-9]\\w{5,29}$") || !password.matches("^[A-Za-z0-9]\\w{5,29}$")) 
+			throw new UsuarioOuSenhaInvalidosException(MensagensDeException.USUARIO_E_SENHAS_INVALIDOS.getMensagem());
 	}
 }

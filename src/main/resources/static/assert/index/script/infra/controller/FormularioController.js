@@ -35,7 +35,7 @@ export class FormularioController {
 	}
 
 	async enviarFormularioDeLogin(body, timeCrypt) {
-		let formLogin = await fetch("/login", {
+		let reqLogin = await fetch("/login", {
 			method: "POST",
 			body: body,
 			headers: {
@@ -43,7 +43,6 @@ export class FormularioController {
 				'aes-crypt': timeCrypt,
 			}
 		});
-		let statusHttp = formLogin.status;
-		this.#service.verificarStatusHttp(statusHttp);
+		this.#service.verificarStatusHttp(reqLogin);
 	}
 }

@@ -13,15 +13,17 @@ import javax.crypto.spec.SecretKeySpec;
 
 import com.google.gson.Gson;
 
+import tk.leooresende01.webformsecurity.infra.controller.advice.exceptions.MensagensDeException;
+import tk.leooresende01.webformsecurity.infra.controller.advice.exceptions.ParametrosNaRequisicaoInvalidosException;
 import tk.leooresende01.webformsecurity.infra.controller.dto.AutenticacaoForm;
 
 public class CryptoUtil {
 
 	public static String descryptAESWhitPrivateKey(String secret, String payload) {
-		byte[] cipherData = Base64.getDecoder().decode(payload);
-		byte[] saltData = Arrays.copyOfRange(cipherData, 8, 16);
-
 		try {
+			byte[] cipherData = Base64.getDecoder().decode(payload);
+			byte[] saltData = Arrays.copyOfRange(cipherData, 8, 16);
+
 			MessageDigest md5 = MessageDigest.getInstance("MD5");
 			final byte[][] keyAndIV = GenerateKeyAndIV(32, 16, 1, saltData, secret.getBytes(StandardCharsets.UTF_8),
 					md5);
@@ -36,7 +38,7 @@ public class CryptoUtil {
 
 			return decryptedText;
 		} catch (Exception ex) {
-			return null;
+			throw new ParametrosNaRequisicaoInvalidosException(MensagensDeException.PARAMETROS_INVALIDOS.getMensagem());
 		}
 	}
 

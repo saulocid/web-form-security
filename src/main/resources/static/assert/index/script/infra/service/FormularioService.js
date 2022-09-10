@@ -14,11 +14,18 @@ export class FormularioService {
 		return JSON.parse(CryptoUtil.criptografarParaAES(time, key)).payload;
 	}
 	
-	verificarStatusHttp(statusHttp) {
-		if (statusHttp == 200) {
+	async verificarStatusHttp(reqHttp) {
+		if (reqHttp.status == 200) {
 			window.location.href = "/sucesso";
 		} else {
-			document.querySelector(".error-message").style.display = "block";
+			let listaDeInputs = document.querySelectorAll(".input-formulario-login");
+			listaDeInputs.forEach(input => input.classList.add("input-formulario-login--error"));
+			let errorMsg = document.querySelector(".error-message");
+			try {				
+				let respObject = JSON.parse(await reqHttp.text());
+				errorMsg.textContent = respObject.mensagem;
+			} catch (e){}
+			errorMsg.style.display = "block";
 		}
 	}
 	

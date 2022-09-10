@@ -51,7 +51,18 @@ main {
 }
 
 .input-formulario-login {
-	padding: 10px 5px;
+	padding: 10px 8px;
+	border-radius: 5px;
+}
+
+.input-formulario-login--error {
+	outline: none;
+	border: 2px red solid;
+}
+
+.input-formulario-login--error:focus {
+	outline: none;
+	border: 2px blue solid;
 }
 
 .campo-submit {
@@ -80,6 +91,8 @@ main {
 .error-message {
 	display: none;
 	color: red;
+	font-size: 17px;
+	font-family: sans-serif;
 	text-align: center;
 	padding: 0 0 20px;	
 }

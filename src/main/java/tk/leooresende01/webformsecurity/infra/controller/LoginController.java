@@ -37,6 +37,9 @@ public class LoginController {
 		//Descriptografando o corpo da requisição e pegando o objeto que representa um formulario de autenticação
 		AutenticacaoForm authForm = this.service.getAuthFormFromCrypto(req, payload.getPayload(), key);
 		
+		//Validar parametros do formulario
+		this.service.validarFormParams(authForm);
+		
 		//Verificando se os parametros passado no cabeçalho e no corpo batem
 		this.service.verificarTime(authForm, aesTimeEncrypt, key);
 		return this.service.autenticarUsuario(authManager, authForm);
