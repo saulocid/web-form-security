@@ -12,7 +12,7 @@ O exemplo foi de um formulario de login mas pode ser feito com qualquer comunica
 # Porque usar criptografia na requisição?
 Para ajudar a evitar ataques de força bruta (brutte-forçe)
 
-Para que pessoas que estão analizando o trafego de rede não possa ver informações valiosas
+Para que pessoas que estão analizando o trafego de rede não possam ver e se apropriarem de informações valiosas (como as de login, por exemplo)
 
 Para dificultar que pessoas consigam replicar a comunicação com clientes http como o cULR, ajudando a fazer com que o programa funcione do jeito desejado
 
