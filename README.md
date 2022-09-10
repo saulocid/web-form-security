@@ -25,4 +25,4 @@ O servidor após descriptografar o corpo da requisição compara uma informaçã
 
 Após o usuario se autenticar,  ele será redirecionado para uma pagina falando que ele está altenticado e poderá acessar qualquer outro caminho do servidor
 
-O usuario e a senhas são "security"
+O usuario e a senha são "security"
