@@ -23,6 +23,6 @@ Caso a pagina seja recarregada, uma nova key será gerada, fazendo com que a ant
 
 O servidor após descriptografar o corpo da requisição compara uma informação passada no cabeçalho com uma do corpo da requisição 
 
-Após o usuario se autenticar,  ele será redirecionado para uma pagina falando que ele está altenticado e poderá acessar qualquer outro caminho do servidor
+Após o usuario se autenticar, ele será redirecionado para uma pagina falando que ele está autenticado e poderá acessar qualquer outro caminho do servidor
 
 O usuario e a senha são "security"
